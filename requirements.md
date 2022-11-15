@@ -2,12 +2,12 @@
 
 ## Functional Requirements
 
-1. requirement
-2. requirement
-3. requirement
-4. requirement
-5. requirement
-6. requirement
+1. Login
+2. Logout
+3. Create new account
+4. Delete account
+5. User homepage
+6. Send messages to followers
 7. Create a Post
 8. Delete a Post
 9. Edit a Post
