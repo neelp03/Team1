@@ -1,5 +1,5 @@
 # Project Name
-- Name (@username)
+- Neel Patel (@neelp03)
 - Name (@username)
 - Steven Vu (@TrustfulDev)
 - Name (@username)

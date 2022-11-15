@@ -1,5 +1,3 @@
-## <remove all of the example text and notes in < > such as this one>
-
 ## Functional Requirements
 
 1. requirement
@@ -18,7 +16,7 @@
 ## Non-functional Requirements
 
 1. non-functional
-2. non-functional
+2. Data Security (encrpyt user information)
 3. Compatibility: We want our site to be responsive on all devices. Additionally, we want to make sure we use features that every browser supports.
 4. non-functional
 
