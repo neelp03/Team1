@@ -19,7 +19,7 @@
 
 1. non-functional
 2. non-functional
-3. non-functional
+3. Compatibility: We want our site to be responsive on all devices. Additionally, we want to make sure we use features that every browser supports.
 4. non-functional
 
 ## Use Cases
