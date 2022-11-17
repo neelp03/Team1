@@ -2,24 +2,23 @@
 
 ## Functional Requirements
 
-1. requirement
-2. requirement
-3. requirement
-4. requirement
-5. requirement
-6. requirement
-7. requirement
-8. requirement
-9. requirement
-10. requirement
-11. requirement
-12. requirement
+1. Login
+2. Logout
+3. Create new account
+4. Delete account
+5. User homepage
+6. Send messages to followers
+7. Create a Post
+8. Delete a Post
+9. Edit a Post
+10. Like/Dislike/Comment a Post
+11. Follow Someone
+12. Search for User
 
 ## Non-functional Requirements
-
-1. non-functional
-2. non-functional
-3. non-functional
+1. Speed - We would want the homepage to load up in under 2 seconds.
+2. Data Security (encrpyt user information)
+3. Compatibility: We want our site to be responsive on all devices. Additionally, we want to make sure we use features that every browser supports.
 4. scalability
 
 ## Use Cases
