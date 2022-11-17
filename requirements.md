@@ -16,11 +16,10 @@
 12. Search for User
 
 ## Non-functional Requirements
-
 1. Speed - We would want the homepage to load up in under 2 seconds.
 2. Data Security (encrpyt user information)
 3. Compatibility: We want our site to be responsive on all devices. Additionally, we want to make sure we use features that every browser supports.
-4. non-functional
+4. scalability
 
 ## Use Cases
 
