@@ -133,3 +133,26 @@
   2. Type in the name of the User you want to search for 
   3. Mutliple Users with the same name will be listed
   4. Choose one of the User's to click on
+
+6. Search for User
+- **Pre-condition:** The user should have a post in order to edit 
+
+- **Trigger:** They click the edit button and update the post
+
+- **Primary Sequence:**
+  
+  1. Click on page to see all their posts
+  2. Click the edit button on the post the user wants to change
+  3. Update the text as desired and press save
+
+- **Primary Postconditions:** The user can edit the post as many times as they want
+
+  1. Edit a post again after editing it once
+
+- **Alternate Sequence:** The user has no post
+  
+  1. Display message that the user has no post
+
+- **Alternate Sequence:** The post has been deleted
+
+  1. Display the message that the post no longer exists
