@@ -134,7 +134,7 @@
   3. Mutliple Users with the same name will be listed
   4. Choose one of the User's to click on
 
-6. Search for User
+6. Edit post
 - **Pre-condition:** The user should have a post in order to edit 
 
 - **Trigger:** They click the edit button and update the post
