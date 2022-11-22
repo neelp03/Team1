@@ -15,7 +15,7 @@
 - All team members attended the meeting
 - Team updates
   - Steven Vu worked on use cases 4 and 5. Added the third non-functional requirement and aided in the 6-12 functional requirements. Will work on the meetings.md next.
-  - 
+  - Neel worked on use case 2 and 3, planning to start making base templates of the app
   - 
   - 
 
