@@ -21,3 +21,9 @@ from app import routes, models
 
 with myapp_obj.app_context():
     db.create_all()
+
+from app.models import User
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
