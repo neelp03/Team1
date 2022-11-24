@@ -11,9 +11,9 @@
 7. Create a Post
 8. Delete a Post
 9. Edit a Post
-10. Like/Dislike/Comment a Post
-11. Follow Someone
-12. Search for User
+10. Like/Dislike/Comment a Post (Hasnain Mucklai)
+11. Follow Someone (Hasnain Mucklai)
+12. Search for User Hasnain Mucklai)
 
 ## Non-functional Requirements
 1. Speed - We would want the homepage to load up in under 2 seconds.
