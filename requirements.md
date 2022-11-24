@@ -1,19 +1,17 @@
-## <remove all of the example text and notes in < > such as this one>
-
 ## Functional Requirements
 
-1. Login
-2. Logout
-3. Create new account
+1. Login (Steven Vu)
+2. Logout (Steven Vu)
+3. Create new account (Steven Vu)
 4. Delete account
 5. User homepage
 6. Send messages to followers
 7. Create a Post
 8. Delete a Post
 9. Edit a Post
-10. Like/Dislike/Comment a Post
-11. Follow User
-12. Search for User
+10. Like/Dislike/Comment a Post (Hasnain Mucklai)
+11. Follow User (Hasnain Mucklai)
+12. Search for User (Hasnain Mucklai)
 
 ## Non-functional Requirements
 1. Speed - We would want the homepage to load up in under 2 seconds.
