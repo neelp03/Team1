@@ -11,7 +11,6 @@ class RegisterForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     confirmPassword = PasswordField('ConfirmedPassword', validators=[DataRequired()])
-    submit = SubmitField('Submit')
 
 class DeleteAccountForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])

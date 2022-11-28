@@ -30,7 +30,7 @@ def delete_account():
 def login():
     current_form = LoginForm()
 
-    if current_form.validate_on_submit():
+    if request.method == 'POST':
         user = User.query.filter_by(username=current_form.username.data).first()
 
         if user is None or not user.check_password(current_form.password.data):
@@ -46,18 +46,18 @@ def login():
 def register():
     current_form = RegisterForm()
 
-    if current_form.validate_on_submit():
+    if request.method == 'POST':
         user = User.query.filter_by(username=current_form.username.data).first()
 
         if user is not None:
             flash('This user exists already!')
             return redirect('/register')
-        elif user.password.data != current_form.check_password.data:
+        elif current_form.password.data != current_form.confirmPassword.data:
             flash ('Passwords do not match!')
             return redirect('/register')
 
-        newUser = User(username=current_form.username.data, email=current_form.email.data, password=current_form.password.data)
-        newUser.set_password(newUser.password.data)
+        newUser = User(username=current_form.username.data, email=current_form.email.data, password_hash=current_form.password.data)
+        newUser.set_password(newUser.password_hash)
         db.session.add(newUser)
         db.session.commit()
         flash('Account Created! Please login.')
