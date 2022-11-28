@@ -1,6 +1,6 @@
 from app import db, myapp_obj
 from app.models import User, Post
-from app.forms import DeleteAccountForm
+from app.forms import LoginForm, RegisterForm, DeleteAccountForm
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
@@ -28,9 +28,40 @@ def delete_account():
 
 @myapp_obj.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html', title='Sign In')
+    current_form = LoginForm()
+
+    if current_form.validate_on_submit():
+        user = User.query.filter_by(username=current_form.username.data).first()
+
+        if user is None or not user.check_password(current_form.password.data):
+            flash('Invalid Password!')
+            return redirect('/login')
+
+        login_user(user)
+        return redirect('/')
+
+    return render_template('login.html', title='Sign In', form=current_form)
 
 @myapp_obj.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html', title='Register')
+    current_form = RegisterForm()
+
+    if current_form.validate_on_submit():
+        user = User.query.filter_by(username=current_form.username.data).first()
+
+        if user is not None:
+            flash('This user exists already!')
+            return redirect('/register')
+        elif user.password.data != current_form.check_password.data:
+            flash ('Passwords do not match!')
+            return redirect('/register')
+
+        newUser = User(username=current_form.username.data, email=current_form.email.data, password=current_form.password.data)
+        newUser.set_password(newUser.password.data)
+        db.session.add(newUser)
+        db.session.commit()
+        flash('Account Created! Please login.')
+        return redirect('/login')
+
+    return render_template('register.html', title='Register', form=current_form)
 
