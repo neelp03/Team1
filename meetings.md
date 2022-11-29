@@ -1,14 +1,3 @@
-## Instructions
-
-- Delete this block before adding to your repository. 
-
-- Delete any instructions you see below they will be within < >
-  
-- This schedule should reflect the meetings from the start of the project until the end of the semester.
-
-- Write at least 1 meeting per week until the end of the semester
-
-  
 ## Meetings
 
 ### 2022-11-17 at 11:30
@@ -17,7 +6,7 @@
   - Steven Vu worked on use cases 4 and 5. Added the third non-functional requirement and aided in the 6-12 functional requirements. Will work on the meetings.md next.
   - Hasnain Mucklai worked on use case 1. Added the first non-functional requirement and aided in the 6-12 functional requirements.
   - Neel worked on use case 2 and 3, planning to start making base templates of the app
-  - 
+  - Maaz worked on use case 9, Researched scalibilty for non-functional requirement of the app
 
 - Group progress is looking good so far. We've completed both readme.md and requirements.md. Next, we need to complete the meetings.md and start coding.
 

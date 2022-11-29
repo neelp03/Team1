@@ -1,19 +1,16 @@
-## <remove all of the example text and notes in < > such as this one>
-
 ## Functional Requirements
 
-1. Login
-2. Logout
-3. Create new account
-4. Delete account
+1. Login (Steven Vu)
+2. Logout (Steven Vu)
+3. Create new account (Steven Vu)
+4. Delete account (Neel Patel)
 5. User homepage
 6. Send messages to followers
 7. Create a Post
 8. Delete a Post
 9. Edit a Post
-<<<<<<< HEAD
 10. Like/Dislike/Comment a Post (Hasnain Mucklai)
-11. Follow Someone (Hasnain Mucklai)
+11. Follow User (Hasnain Mucklai)
 12. Search for User Hasnain Mucklai)
 
 ## Non-functional Requirements
