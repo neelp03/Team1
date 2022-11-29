@@ -86,7 +86,7 @@
   3. Redirects to post
 
 4. Follow User
-- **Pre-condition:** The User can't already be followed and they must view the user's profile to follow
+- **Pre-condition:** In order to follow user must exist
 
 - **Trigger:** They must click the big follow button when viewing the User's profile
 
@@ -103,7 +103,7 @@
   2. The big follow button will now be UnFollow, they can choose to click the button and UnFollow the User
 
 5. Search for User
-- **Pre-condition:** No big conditions. There should be a search bar at the top on all pages (navbar)
+- **Pre-condition:** No preconditions, searching is available to public
 
 - **Trigger:** They click on the search bar and start typing
 
