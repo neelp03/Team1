@@ -43,6 +43,11 @@
   2. Ask them to re enter their information
   3. Then proceed to message the specific person
 
+- **Alternate Sequence:**
+  1. User types in invalid characters such as symbols or emojis
+  2. User clicks send
+  3. System states message can not be sent due to invalid input
+
 2. Create a post
 - **Pre-condition:** User must be logged in
 
