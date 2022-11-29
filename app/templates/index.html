@@ -1,6 +1,26 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
 {% block content %}
     <h1>Home</h1>
-    <p>Flask App</p>
+    <div class="row">
+        <div class="col-md-8">
+            {% for post in posts %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.body }}</p>
+                        <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-danger">Delete Post</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{{ url_for('delete_account') }}" class="btn btn-danger">Delete Account</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
