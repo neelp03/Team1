@@ -1,0 +1,209 @@
+/* Global Styling */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+}
+
+.container {
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login Page Styling */
+.login-container {
+    display: flex;
+    justify-content: center;
+    border-radius: 1rem;
+    border-bottom: 2px solid #B399D4;
+}
+
+.form-container {
+    padding: 6rem 10rem;
+    text-align: center;
+
+    border-radius: 1rem 0 0 1rem;
+    background-color: white;
+}
+
+.form-container h1 {
+    margin-bottom: 2rem;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field label {
+    margin: 0;
+    font-size: 1.5rem;
+    color: gray;
+}
+
+.form-field a {
+    margin-top: 0.5rem;
+}
+
+.form-input {
+    min-width: 20rem;
+    min-height: 3rem;
+    text-align: center;
+
+    border: none;
+    border-bottom: 2px solid #B399D4;
+    background-color: transparent;
+}
+
+.login-carousel {
+    width: 420px;
+    height: auto;
+    position: relative;
+
+    overflow: hidden;
+    border-radius: 0 1rem 1rem 0;
+}
+
+.register-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+}
+
+.register-btn {
+    color: white;
+    border-radius: 1rem;
+    border: 1px solid white;
+    padding: 1rem;
+    padding-bottom: 1.25rem;
+    line-height: 0;
+    transition: 0.1s ease-in-out;
+}
+
+.register-btn:hover {
+    color: black;
+    background-color: white;
+    text-decoration: none;
+    transform: scale(1.05);
+}
+
+.carousel-wrapper {
+    width: 1260px; 
+    animation: carousel-rotate 18s ease-in-out infinite;
+}
+
+.carousel-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    float: left;
+}
+
+.img2 {
+    margin-left: -420px;
+}
+
+.img3 {
+    margin-left: -840px;
+}
+
+@keyframes carousel-rotate {
+    20% {
+        margin-left: 0px;
+    }
+
+    30% {
+        margin-left: 420px;
+    }
+
+    50% {
+        margin-left: 420px;
+    }
+
+    60% {
+        margin-left: 840px;
+    }
+
+    80% {
+        margin-left: 840px;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    .form-container {
+        padding: 2rem 6rem;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .login-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow-x: hidden;
+        margin-top: 3.5rem;
+    }
+
+    .form-container {
+        border-radius: 1rem 1rem 0 0;
+    }
+
+    .login-carousel {
+        width: 420px;
+        height: 420px;
+        position: relative;
+    
+        overflow: hidden;
+        border-radius: 0 0 1rem 1rem;
+    }
+    
+}
+
+/* Register Page Styling */
+.register {
+    background-color: white;
+    padding: 6rem 8rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 1rem;
+    border-bottom: 2px solid #B399D4;
+    overflow-x: hidden;
+}
+
+.register h1 {
+    margin-bottom: 2rem;
+}
+
+.register form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
