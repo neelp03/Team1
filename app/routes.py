@@ -1,7 +1,7 @@
 from app import db, myapp_obj
 from app.models import User, Post
-from app.forms import LoginForm, RegisterForm, DeleteAccountForm
-from flask import render_template, flash, redirect, url_for, request
+from app.forms import LoginForm, RegisterForm, DeleteAccountForm, PostForm, DeletePostForm
+from flask import render_template, flash, redirect, url_for, request, abort
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
@@ -65,3 +65,25 @@ def register():
 
     return render_template('register.html', title='Register', form=current_form)
 
+# create a post
+@myapp_obj.route('/create_post', methods=['GET', 'POST'])
+def create_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!')
+        return redirect(url_for('index'))
+    return render_template('create_post.html', title='Create Post', form=form, legend='Create Post')
+
+# delete post
+@myapp_obj.route('/post/<int:post_id>/delete', methods=['POST'])
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted!')
+    return redirect(url_for('index'))
