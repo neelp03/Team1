@@ -29,7 +29,8 @@ def delete_account():
 @myapp_obj.route('/login', methods=['GET', 'POST'])
 def login():
     current_form = LoginForm()
-
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     if request.method == 'POST':
         user = User.query.filter_by(username=current_form.username.data).first()
 
