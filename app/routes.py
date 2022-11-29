@@ -1,6 +1,6 @@
 from app import db, myapp_obj
 from app.models import User, Post
-from app.forms import LoginForm, RegisterForm, DeleteAccountForm, PostForm, DeletePostForm
+from app.forms import LoginForm, RegisterForm, DeleteAccountForm, PostForm
 from flask import render_template, flash, redirect, url_for, request, abort
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
