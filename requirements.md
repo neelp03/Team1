@@ -4,14 +4,14 @@
 2. Logout (Steven Vu)
 3. Create new account (Steven Vu)
 4. Delete account (Neel Patel)
-5. User homepage
-6. Send messages to followers
-7. Create a Post
-8. Delete a Post
-9. Edit a Post
+5. User homepage (Maaz Adil)
+6. Send messages to followers (Maaz Adil)
+7. Create a Post (Neel Patel)
+8. Delete a Post (Neel Patel)
+9. Edit a Post (Maaz Adil)
 10. Like/Dislike/Comment a Post (Hasnain Mucklai)
 11. Follow User (Hasnain Mucklai)
-12. Search for User Hasnain Mucklai)
+12. Search for User (Hasnain Mucklai)
 
 ## Non-functional Requirements
 1. Speed - We would want the homepage to load up in under 2 seconds.
