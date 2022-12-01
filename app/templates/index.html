@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
+
+{% block nav %}
+    <li class="nav-item">
+        <a type="submit" class="nav-link" href="{{ url_for('login') }}">Logout</a>
+    </li>
+{% endblock %}
+
 {% block content %}
     <h1>Home</h1>
     <p>Flask App</p>

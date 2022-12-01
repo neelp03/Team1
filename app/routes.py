@@ -6,11 +6,14 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
 
-@myapp_obj.route('/')
-@myapp_obj.route('/index')
+@myapp_obj.route('/', methods=['GET', 'POST'])
+@myapp_obj.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
     posts = Post.query.all()
+    if request.method == 'POST':
+        logout_user(current_user)
+
     return render_template('index.html', title='Home', posts=posts)
 
 @myapp_obj.route('/delete_account', methods=['GET', 'POST'])
