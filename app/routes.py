@@ -10,6 +10,8 @@ from datetime import datetime
 @myapp_obj.route('/index')
 @login_required
 def index():
+    posts = Post.query.all()
+
     # posts = Post.query.all()
     # test posts
     posts = [
@@ -25,6 +27,12 @@ def index():
         }
     ]
     return render_template('index.html', title='Home', posts=posts)
+
+@myapp_obj.route('/logout', methods=['GET', 'POST'])
+def logout():
+    if current_user.is_authenticated:
+        logout_user()
+        return redirect('/login')
 
 @myapp_obj.route('/delete_account', methods=['GET', 'POST'])
 def delete_account():
