@@ -6,13 +6,11 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
 
-@myapp_obj.route('/', methods=['GET', 'POST'])
-@myapp_obj.route('/index', methods=['GET', 'POST'])
+@myapp_obj.route('/')
+@myapp_obj.route('/index')
 @login_required
 def index():
     posts = Post.query.all()
-    if request.method == 'POST':
-        logout_user(current_user)
 
     # posts = Post.query.all()
     # test posts
@@ -29,6 +27,12 @@ def index():
         }
     ]
     return render_template('index.html', title='Home', posts=posts)
+
+@myapp_obj.route('/logout', methods=['GET', 'POST'])
+def logout():
+    if current_user.is_authenticated:
+        logout_user()
+        return redirect('/login')
 
 @myapp_obj.route('/delete_account', methods=['GET', 'POST'])
 def delete_account():
@@ -56,7 +60,6 @@ def login():
             return redirect('/login')
 
         login_user(user)
-        current_user = user
         return redirect('/')
 
     return render_template('login.html', title='Sign In', form=current_form)
