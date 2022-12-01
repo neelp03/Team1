@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+{% if post.author == current_user %}
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>Are you sure you want to delete this post?</p>
+        <input type="submit" value="Delete">
+    </form>
+{% else %}
+    <p>You do not have permission to delete this post.</p>
+{% endif %}
+{% endblock %}

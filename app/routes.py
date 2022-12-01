@@ -1,7 +1,7 @@
 from app import db, myapp_obj
 from app.models import User, Post
-from app.forms import LoginForm, RegisterForm, DeleteAccountForm
-from flask import render_template, flash, redirect, url_for, request
+from app.forms import LoginForm, RegisterForm, DeleteAccountForm, PostForm
+from flask import render_template, flash, redirect, url_for, request, abort
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
@@ -14,13 +14,27 @@ def index():
     if request.method == 'POST':
         logout_user(current_user)
 
+    # posts = Post.query.all()
+    # test posts
+    posts = [
+        { 
+            'author': {'username': 'John'},
+            'body': 'abcdefghijklmnopqrstuvwxyz',
+            'id': '1'
+        },
+        {
+            'author': {'username': 'Jane'},
+            'body': 'abcdefghijklmnopqrstuvwxyz',
+            'id': 2
+        }
+    ]
     return render_template('index.html', title='Home', posts=posts)
 
 @myapp_obj.route('/delete_account', methods=['GET', 'POST'])
 def delete_account():
     form = DeleteAccountForm()
     if form.validate_on_submit():
-        if form.password.data == current_user.password:
+        if form.password.data == current_user.password_hash:
             db.session.delete(current_user)
             db.session.commit()
             flash('Your account has been deleted')
@@ -32,7 +46,8 @@ def delete_account():
 @myapp_obj.route('/login', methods=['GET', 'POST'])
 def login():
     current_form = LoginForm()
-
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     if request.method == 'POST':
         user = User.query.filter_by(username=current_form.username.data).first()
 
@@ -41,6 +56,7 @@ def login():
             return redirect('/login')
 
         login_user(user)
+        current_user = user
         return redirect('/')
 
     return render_template('login.html', title='Sign In', form=current_form)
@@ -68,3 +84,24 @@ def register():
 
     return render_template('register.html', title='Register', form=current_form)
 
+# create a post
+@myapp_obj.route('/create_post', methods=['GET', 'POST'])
+def create_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!')
+        return redirect(url_for('index'))
+    return render_template('create_post.html', title='Create Post', form=form, legend='Create Post')
+
+@myapp_obj.route('/post/<int:post_id>/delete', methods=['POST'])
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted!')
+    return redirect(url_for('index'))
