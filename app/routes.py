@@ -10,14 +10,27 @@ from datetime import datetime
 @myapp_obj.route('/index')
 @login_required
 def index():
-    posts = Post.query.all()
+    # posts = Post.query.all()
+    # test posts
+    posts = [
+        { 
+            'author': {'username': 'John'},
+            'body': 'abcdefghijklmnopqrstuvwxyz',
+            'id': '1'
+        },
+        {
+            'author': {'username': 'Jane'},
+            'body': 'abcdefghijklmnopqrstuvwxyz',
+            'id': 2
+        }
+    ]
     return render_template('index.html', title='Home', posts=posts)
 
 @myapp_obj.route('/delete_account', methods=['GET', 'POST'])
 def delete_account():
     form = DeleteAccountForm()
     if form.validate_on_submit():
-        if form.password.data == current_user.password:
+        if form.password.data == current_user.password_hash:
             db.session.delete(current_user)
             db.session.commit()
             flash('Your account has been deleted')
@@ -78,7 +91,6 @@ def create_post():
         return redirect(url_for('index'))
     return render_template('create_post.html', title='Create Post', form=form, legend='Create Post')
 
-# delete post
 @myapp_obj.route('/post/<int:post_id>/delete', methods=['POST'])
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)

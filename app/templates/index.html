@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Home</h1>
+
     <div class="row">
-        <div class="col-md-8">
+        <div style="align-items: center; justify-content: center; text-align: center;" class="col-md-8">
+            <a href="{{ url_for('create_post') }}" style="margin:20px;" class="btn btn-primary">Create A Post</a>
             {% for post in posts %}
-                <div class="card">
+                <div style="margin: 20px; width:fit-content; height: auto;" class="card">
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title }}</h5>
                         <p class="card-text">{{ post.body }}</p>
@@ -12,15 +13,6 @@
                     </div>
                 </div>
             {% endfor %}
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{{ url_for('delete_account') }}" class="btn btn-danger">Delete Account</a>
-                    </h5>
-                </div>
-            </div>
         </div>
     </div>
 {% endblock %}
