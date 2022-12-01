@@ -11,21 +11,6 @@ from datetime import datetime
 @login_required
 def index():
     posts = Post.query.all()
-
-    # posts = Post.query.all()
-    # test posts
-    posts = [
-        { 
-            'author': {'username': 'John'},
-            'body': 'abcdefghijklmnopqrstuvwxyz',
-            'id': '1'
-        },
-        {
-            'author': {'username': 'Jane'},
-            'body': 'abcdefghijklmnopqrstuvwxyz',
-            'id': 2
-        }
-    ]
     return render_template('index.html', title='Home', posts=posts)
 
 @myapp_obj.route('/logout', methods=['GET', 'POST'])
@@ -108,3 +93,21 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!')
     return redirect(url_for('index'))
+
+@myapp_obj.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
+def update_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('Your post has been updated!')
+        return redirect(url_for('post', post_id=post.id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('create_post.html', title='Update Post', form=form, legend='Update Post')
+
