@@ -9,14 +9,104 @@ html, body {
 .navbar {
     position: fixed;
     width: 100%;
+    z-index: 100;
 }
 
 .container {
+    position: relative;
     height: 100%;
 
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.form-input, .delete-container input#password {
+    min-width: 20rem;
+    min-height: 3rem;
+    text-align: center;
+
+    border: none;
+    border-bottom: 2px solid #B399D4;
+    background-color: transparent;
+}
+
+/* Home Page Styling */
+.home-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding-top: 3.5rem;
+}
+
+.home-left {
+    min-width: 20rem;
+
+    padding: 3rem 0rem 1rem 1rem;
+    background-color: white;
+    border-left: 1px solid #B399D4;
+    border-right: 1px solid #B399D4;
+    overflow: none;
+}
+
+.home-left p, h2 {
+    margin: 0;
+}
+
+.home-title {
+    display: flex;
+}
+
+.home-title img {
+    width: 80px;
+    height: 80px;
+}
+
+.home-title-text {
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+}
+
+.home-nav {
+    margin-top: 3rem;
+    list-style: none;
+    width: 100%;
+    height: 80%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.home-nav li {
+    background-color: #0069d9;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    margin-left: -1.9rem;
+    width: 100%;
+}
+
+.home-nav li a {
+    text-decoration: none;
+    display: block;
+    color: white;
+}
+
+.home-nav li:last-of-type {
+    background-color: #d92100;
+    margin-top: auto;
+}
+
+.home-right {
+    position: relative;
+    overflow-y: auto;
+}
+
+@media screen and (max-width: 770px), screen and (max-height: 760px) {
+    .home-left {
+        display: none;
+    }
 }
 
 /* Login Page Styling */
@@ -58,16 +148,6 @@ html, body {
 
 .form-field a {
     margin-top: 0.5rem;
-}
-
-.form-input {
-    min-width: 20rem;
-    min-height: 3rem;
-    text-align: center;
-
-    border: none;
-    border-bottom: 2px solid #B399D4;
-    background-color: transparent;
 }
 
 .login-carousel {
@@ -206,4 +286,36 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+
+/* Delete Account Page Styling */
+.delete-container {
+    background-color: white;
+    padding: 6rem 8rem;
+    border-radius: 1rem;
+    border-bottom: 2px solid #B399D4;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+.delete-container h1 {
+    margin-bottom: 2rem;
+}
+
+.delete-container input#submit {
+    margin-top: 2rem;
+
+    width: 100%;
+    padding: 1rem;
+}
+
+.delete-warning {
+    display: flex;
+    justify-content: center;
+    color: #6c757d;
+    margin-top: 0.5rem;
 }
