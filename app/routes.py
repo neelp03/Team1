@@ -26,7 +26,7 @@ def index():
             'id': 2
         }
     ]
-    return render_template('index.html', title='Home', posts=posts)
+    return render_template('index.html', title='Home', posts=posts, person=current_user)
 
 @myapp_obj.route('/logout', methods=['GET', 'POST'])
 def logout():
