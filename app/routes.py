@@ -22,6 +22,10 @@ def logout():
 @myapp_obj.route('/delete_account', methods=['GET', 'POST'])
 @login_required
 def delete_account():
+    posts = Post.query.filter_by(author=current_user)
+    for post in posts:
+        db.session.delete(post)
+        db.session.commit()
     user = User.query.filter_by(username=current_user.username).first()
     db.session.delete(user)
     db.session.commit()
