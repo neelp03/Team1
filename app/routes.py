@@ -20,17 +20,12 @@ def logout():
         return redirect('/login')
 
 @myapp_obj.route('/delete_account', methods=['GET', 'POST'])
+@login_required
 def delete_account():
-    form = DeleteAccountForm()
-    if form.validate_on_submit():
-        if form.password.data == current_user.password_hash:
-            db.session.delete(current_user)
-            db.session.commit()
-            flash('Your account has been deleted')
-            return redirect(url_for('index'))
-        else:
-            flash('Incorrect password')
-    return render_template('delete_account.html', title='Delete Account', form=form)
+    user = User.query.filter_by(username=current_user.username).first()
+    db.session.delete(user)
+    db.session.commit()
+    return render_template('delete_account.html', title='Delete Account')
 
 @myapp_obj.route('/login', methods=['GET', 'POST'])
 def login():
@@ -72,7 +67,6 @@ def register():
 
     return render_template('register.html', title='Register', form=current_form)
 
-# create a post
 @myapp_obj.route('/create_post', methods=['GET', 'POST'])
 def create_post():
     form = PostForm()
@@ -110,4 +104,3 @@ def update_post(post_id):
         form.title.data = post.title
         form.content.data = post.content
     return render_template('create_post.html', title='Update Post', form=form, legend='Update Post')
-
