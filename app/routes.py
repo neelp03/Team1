@@ -78,7 +78,8 @@ def create_post():
         return redirect(url_for('index'))
     return render_template('create_post.html', title='Create Post', form=form, legend='Create Post')
 
-@myapp_obj.route('/post/<int:post_id>/delete', methods=['POST'])
+# delete a post
+@myapp_obj.route('/delete_post/<int:post_id>', methods=['GET', 'POST'])
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:
