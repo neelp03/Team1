@@ -355,3 +355,20 @@ html, body {
     flex-direction: column;
     gap: 1.5rem;
 }
+
+* Profile Page Styling */
+.user-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.user-body {
+    background-color: white;
+    display: flex;
+    padding: 100px;
+}
+
+.user-body h1 {
+    font-size: 4rem;
+}
+

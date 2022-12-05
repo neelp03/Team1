@@ -8,19 +8,22 @@
 {% endblock %}
 
 {% block content %}
-    <div style="margin: 20px; width:fit-content; height: auto;" class="card">
+    <div class="user-container">
         <div class="user-body">
-            <h5 class="user-name">{{ user.username }}</h5>
-            <button type="button">Follow</button>
+            <img src="{{url_for('static',filename = 'images/profilePic.png')}}" alt="Profile Picture"/>
+            <div>
+                <h1 class="user-name">{{ user.username }}</h1>
+                <button type="button">Follow</button>
+            </div>
         </div>
-    </div>
 
-    {% for post in user.posts %}
+        {% for post in user.posts %}
         <div style="margin: 20px; width:fit-content; height: auto;" class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text">{{ post.body }}</p>
+                <p class="card-text">{{ post.content }}</p>
             </div>
         </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock %}
