@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div style="margin: 20px; width:fit-content; height: auto;" class="card">
+        <div class="user-body">
+            <h5 class="user-name">{{ user.username }}</h5>
+            <button type="button">Follow</button>
+        </div>
+    </div>
+    {% for post in user.posts %}
+        <div style="margin: 20px; width:fit-content; height: auto;" class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.body }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

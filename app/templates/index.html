@@ -10,25 +10,32 @@
 {% block content %}
     <div class="home-container">
         <div class="home-left">
-        <div class="home-title">
-            <img src="{{url_for('static',filename = 'images/profilePic.png')}}" alt="Profile Picture"/>
-            <div class="home-title-text">
-                <p>Welcome back,</p>
-                <h2>{{ current_user.username }}</h2>
+            <div class="home-title">
+                <img src="{{url_for('static',filename = 'images/profilePic.png')}}" alt="Profile Picture"/>
+                <div class="home-title-text">
+                    <p>Welcome back,</p>
+                    <h2>{{ current_user.username }}</h2>
+                </div>
+            </div>
+
+            <div class="home-nav">
+                <a href="#">My Profile</a>
+                <a href="#">My Friends</a>
+                <a href="#">My Posts</a>
+                <a href="#">Messages</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
             </div>
         </div>
-        <div class="home-nav">
-            <a href="#">My Profile</a>
-            <a href="#">My Friends</a>
-            <a href="#">My Posts</a>
-            <a href="#">Messages</a>
-            <a href="{{ url_for('logout') }}">Logout</a>
-        </div>
-    </div>
 
     <div class="home-right">
-        <div style="align-items: center; justify-content: center; text-align: center;">
-            <a href="{{ url_for('create_post') }}" style="margin:20px;" class="btn btn-primary">Create A Post</a>
+        <div>
+            <form method="get" action="{{ url_for('user_profile') }}" class="search-form">    
+                <input type="text" class="form-input" id="username" name="username" placeholder="Username"/>
+                <button type="submit" class="btn btn-primary">Search</button>
+                <a href="{{ url_for('create_post') }}" style="margin:20px;" class="btn btn-primary">Create A Post</a>
+            </form>
+        </div>
+        <div class="card-container">
             {% for post in posts %}
                 <div class="home-card">
                     <div class="card-body">
@@ -41,6 +48,5 @@
                 </div>
             {% endfor %}
         </div>
-    </div>
     </div>
 {% endblock %}

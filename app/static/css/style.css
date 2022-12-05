@@ -50,6 +50,7 @@ html, body {
 
 .home-left p, h2 {
     margin: 0;
+    min-width: 6.875rem;
 }
 
 .home-title {
@@ -97,11 +98,24 @@ html, body {
     margin: 3rem;
 }
 
+.search-form button {
+    margin-left: 1rem;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .home-card {
     background-color: rgb(245, 245, 245);
     border-radius: 1rem;
     border-bottom: 2px solid #B399D4;
     margin: 1rem 0;
+    min-width: 100%;
 }
 
 @media screen and (max-height: 531px), screen and (max-width: 768px) {
