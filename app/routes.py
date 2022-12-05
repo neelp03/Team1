@@ -100,6 +100,10 @@ def delete_post(post_id):
 def user_profile():
     username = request.args.get('username')
     user = User.query.filter_by(username=username).first()
+
+    if user is None:
+        flash("User does not exist")
+        return redirect('/index')
     return render_template('user_profile.html', title='User profile', user=user)
 
 @myapp_obj.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
