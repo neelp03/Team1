@@ -10,21 +10,21 @@
 {% block content %}
     <div class="home-container">
         <div class="home-left">
-        <div class="home-title">
-            <img src="{{url_for('static',filename = 'images/profilePic.png')}}" alt="Profile Picture"/>
-            <div class="home-title-text">
-                <p>Welcome back,</p>
-                <h2>{{ current_user.username }}</h2>
+            <div class="home-title">
+                <img src="{{url_for('static',filename = 'images/profilePic.png')}}" alt="Profile Picture"/>
+                <div class="home-title-text">
+                    <p>Welcome back,</p>
+                    <h2>{{ current_user.username }}</h2>
+                </div>
             </div>
+            <ul class="home-nav">
+                <li><a href="#">My Profile</a></li>
+                <li><a href="#">My Friends</a></li>
+                <li><a href="#">My Posts</a></li>
+                <li><a href="#">Messages</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
         </div>
-        <ul class="home-nav">
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#">My Friends</a></li>
-            <li><a href="#">My Posts</a></li>
-            <li><a href="#">Messages</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        </ul>
-    </div>
 
     <div class="row home-right">
         <div style="align-items: center; justify-content: center; text-align: center;" class="col-md-8">
@@ -38,9 +38,14 @@
                             <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
+        <div>
+            <form method="get" action="{{ url_for('user_profile') }}">    
+                <input type="text" class="form-input" id="username" name="username" placeholder="Username"/>
+                <input type="submit">Search</input>
+            </form>
+        </div>
     </div>
 {% endblock %}
