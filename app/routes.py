@@ -28,6 +28,7 @@ def index():
     ]
     return render_template('index.html', title='Home', posts=posts, person=current_user)
 
+
 @myapp_obj.route('/logout', methods=['GET', 'POST'])
 def logout():
     if current_user.is_authenticated:
@@ -108,3 +109,9 @@ def delete_post(post_id):
     db.session.commit()
     flash('Your post has been deleted!')
     return redirect(url_for('index'))
+
+@myapp_obj.route('/user_profile', methods=['GET'])
+def user_profile():
+    username = request.args.get('username')
+    user = User.query.filter_by(username=username).first()
+    return render_template('user_profile.html', title='User profile', user=user)
