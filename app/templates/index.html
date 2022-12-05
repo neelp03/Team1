@@ -17,20 +17,27 @@
                     <h2>{{ current_user.username }}</h2>
                 </div>
             </div>
-            <ul class="home-nav">
-                <li><a href="#">My Profile</a></li>
-                <li><a href="#">My Friends</a></li>
-                <li><a href="#">My Posts</a></li>
-                <li><a href="#">Messages</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
-            </ul>
+
+            <div class="home-nav">
+                <a href="#">My Profile</a>
+                <a href="#">My Friends</a>
+                <a href="#">My Posts</a>
+                <a href="#">Messages</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </div>
         </div>
 
-    <div class="row home-right">
-        <div style="align-items: center; justify-content: center; text-align: center;" class="col-md-8">
-            <a href="{{ url_for('create_post') }}" style="margin:20px;" class="btn btn-primary">Create A Post</a>
+    <div class="home-right">
+        <div>
+            <form method="get" action="{{ url_for('user_profile') }}" class="search-form">    
+                <input type="text" class="form-input" id="username" name="username" placeholder="Username"/>
+                <button type="submit" class="btn btn-primary">Search</button>
+                <a href="{{ url_for('create_post') }}" style="margin:20px;" class="btn btn-primary">Create A Post</a>
+            </form>
+        </div>
+        <div class="card-container">
             {% for post in posts %}
-                <div style="margin: 20px; width:fit-content; height: auto;" class="card">
+                <div class="home-card">
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title }}</h5>
                         <p class="card-text">{{ post.content }}</p>
@@ -38,14 +45,8 @@
                             <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-danger">Delete</a>
                         {% endif %}
                     </div>
-                {% endfor %}
-            </div>
-        </div>
-        <div>
-            <form method="get" action="{{ url_for('user_profile') }}">    
-                <input type="text" class="form-input" id="username" name="username" placeholder="Username"/>
-                <input type="submit">Search</input>
-            </form>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

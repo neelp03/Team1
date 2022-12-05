@@ -23,13 +23,15 @@ def logout():
 @myapp_obj.route('/delete_account', methods=['GET', 'POST'])
 @login_required
 def delete_account():
-    posts = Post.query.filter_by(author=current_user)
-    for post in posts:
-        db.session.delete(post)
+    if request.method == 'POST':
+        posts = Post.query.filter_by(author=current_user)
+        for post in posts:
+            db.session.delete(post)
+            db.session.commit()
+        user = User.query.filter_by(username=current_user.username).first()
+        db.session.delete(user)
         db.session.commit()
-    user = User.query.filter_by(username=current_user.username).first()
-    db.session.delete(user)
-    db.session.commit()
+        return redirect('/login')
     return render_template('delete_account.html', title='Delete Account')
 
 @myapp_obj.route('/login', methods=['GET', 'POST'])
@@ -111,7 +113,7 @@ def update_post(post_id):
         abort(403)
     form = PostForm()
     if form.validate_on_submit():
-        post.title = form.title.data
+        # post.title = form.title.data
         post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!')
