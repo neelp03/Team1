@@ -11,22 +11,7 @@ from datetime import datetime
 @login_required
 def index():
     posts = Post.query.all()
-
-    # posts = Post.query.all()
-    # test posts
-    posts = [
-        { 
-            'author': {'username': 'John'},
-            'body': 'abcdefghijklmnopqrstuvwxyz',
-            'id': '1'
-        },
-        {
-            'author': {'username': 'Jane'},
-            'body': 'abcdefghijklmnopqrstuvwxyz',
-            'id': 2
-        }
-    ]
-    return render_template('index.html', title='Home', posts=posts, person=current_user)
+    return render_template('index.html', title='Home', posts=posts)
 
 
 @myapp_obj.route('/logout', methods=['GET', 'POST'])
@@ -36,17 +21,16 @@ def logout():
         return redirect('/login')
 
 @myapp_obj.route('/delete_account', methods=['GET', 'POST'])
+@login_required
 def delete_account():
-    form = DeleteAccountForm()
-    if form.validate_on_submit():
-        if form.password.data == current_user.password_hash:
-            db.session.delete(current_user)
-            db.session.commit()
-            flash('Your account has been deleted')
-            return redirect(url_for('index'))
-        else:
-            flash('Incorrect password')
-    return render_template('delete_account.html', title='Delete Account', form=form)
+    posts = Post.query.filter_by(author=current_user)
+    for post in posts:
+        db.session.delete(post)
+        db.session.commit()
+    user = User.query.filter_by(username=current_user.username).first()
+    db.session.delete(user)
+    db.session.commit()
+    return render_template('delete_account.html', title='Delete Account')
 
 @myapp_obj.route('/login', methods=['GET', 'POST'])
 def login():
@@ -88,7 +72,6 @@ def register():
 
     return render_template('register.html', title='Register', form=current_form)
 
-# create a post
 @myapp_obj.route('/create_post', methods=['GET', 'POST'])
 def create_post():
     form = PostForm()
@@ -100,7 +83,8 @@ def create_post():
         return redirect(url_for('index'))
     return render_template('create_post.html', title='Create Post', form=form, legend='Create Post')
 
-@myapp_obj.route('/post/<int:post_id>/delete', methods=['POST'])
+# delete a post
+@myapp_obj.route('/delete_post/<int:post_id>', methods=['GET', 'POST'])
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:
@@ -119,3 +103,20 @@ def user_profile():
         flash("User does not exist")
         return redirect('/index')
     return render_template('user_profile.html', title='User profile', user=user)
+
+@myapp_obj.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
+def update_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('Your post has been updated!')
+        return redirect(url_for('post', post_id=post.id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('create_post.html', title='Update Post', form=form, legend='Update Post')
