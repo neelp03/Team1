@@ -9,7 +9,7 @@
 7. Create a Post (Neel Patel)
 8. Delete a Post (Neel Patel)
 9. Edit a Post (Maaz Adil)
-10. Like/Dislike/Comment a Post (Hasnain Mucklai)
+10. Like/Dislike a Post (Hasnain Mucklai)
 11. Follow User (Hasnain Mucklai)
 12. Search for User (Hasnain Mucklai)
 

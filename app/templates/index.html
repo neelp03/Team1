@@ -41,6 +41,12 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title }}</h5>
                         <p class="card-text">{{ post.content }}</p>
+                        <p class="card-text">{{ post.likes }}</p>
+                        <p class="card-text">{{ post.dislikes }}</p>
+                        {% if post.author != current_user %}
+                            <button type="button">Like</button>
+                            <button type="button">Dislike</button>
+                        {% endif %}
                         {% if post.author == current_user %}
                             <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-danger">Delete</a>
                         {% endif %}
