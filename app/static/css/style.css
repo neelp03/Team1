@@ -299,23 +299,21 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: left;
 }
 
 .delete-container h1 {
     margin-bottom: 2rem;
 }
 
-.delete-container input#submit {
-    margin-top: 2rem;
-
-    width: 100%;
-    padding: 1rem;
+@media screen and (max-width: 1000px) {
+    .delete-container {
+        padding: 3rem 4rem;
+    }
 }
 
-.delete-warning {
-    display: flex;
-    justify-content: center;
-    color: #6c757d;
-    margin-top: 0.5rem;
+@media screen and (max-width: 800px) {
+    .delete-container h1 {
+        font-size: 1.5rem;
+        
+    }
 }
