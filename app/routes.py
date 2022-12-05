@@ -1,6 +1,6 @@
 from app import db, myapp_obj
 from app.models import User, Post
-from app.forms import LoginForm, RegisterForm, DeleteAccountForm, PostForm
+from app.forms import LoginForm, RegisterForm, DeleteAccountForm, PostForm, EditPostForm
 from flask import render_template, flash, redirect, url_for, request, abort
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
@@ -107,4 +107,16 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
     flash('Your post has been deleted!')
+    return redirect(url_for('index'))
+
+@myapp_obj.route('/post/<int:post_id>/edit', methods=['POST'])
+def edit_post(post_id):
+    form = EditPostForm()
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    post.title = form.title.datas
+    post.content = form.content.data
+    db.session.commit()
+    flash('Your post has been edited!')
     return redirect(url_for('index'))
