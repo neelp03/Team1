@@ -15,6 +15,11 @@ class RegisterForm(FlaskForm):
 class DeleteAccountForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Delete Account')
+    
+class EditPostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = StringField('Content', validators=[DataRequired()])
+    submit = SubmitField('Post')
 
 # create a post
 class PostForm(FlaskForm):
