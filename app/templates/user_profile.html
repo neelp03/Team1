@@ -13,7 +13,15 @@
             <img src="{{url_for('static',filename = 'images/profilePic.png')}}" alt="Profile Picture"/>
             <div>
                 <h1 class="user-name">{{ user.username }}</h1>
-                <button type="button">Follow</button>
+                {% if user.id in current_user.following %}
+                    <form method="post" action="{{ url_for('unfollow', user_id=user.id) }}">
+                        <button type="submit" href="{{ url_for('unfollow', username = user.username) }}" class="btn btn-primary">Following</button>
+                    </form>
+                {% else %}
+                    <form method="post" action="{{ url_for('follow', user_id=user.id) }}">
+                        <button type="submit" href="{{ url_for('follow', username = user.username) }}" class="btn btn-primary">Follow</button>
+                    </form> 
+                {% endif %}
             </div>
         </div>
 
