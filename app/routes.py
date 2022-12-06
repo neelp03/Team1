@@ -65,7 +65,7 @@ def register():
             flash ('Passwords do not match!')
             return redirect('/register')
 
-        newUser = User(username=current_form.username.data, email=current_form.email.data, password_hash=current_form.password.data, following=[])
+        newUser = User(username=current_form.username.data, email=current_form.email.data, password_hash=current_form.password.data,)
         newUser.set_password(newUser.password_hash)
         db.session.add(newUser)
         db.session.commit()
@@ -96,17 +96,24 @@ def delete_post(post_id):
     flash('Your post has been deleted!')
     return redirect(url_for('index'))
 
-# @myapp_obj.route('/user_profile', methods=['GET'])
-# def user_profile():
-#     username = request.args.get('username')
-#     user = User.query.filter_by(username=username).first()
-#     logged_in_user = User.query.get_or_404(current_user.id)
+@myapp_obj.route('/user_profile', methods=['GET'])
+def user_profile():
+    username = request.args.get('username')
+    user = User.query.filter_by(username=username).first()
+    logged_in_user = User.query.get_or_404(current_user.id)
 
-#     if user is None:
-#         flash("User does not exist")
-#         return redirect('/index')
-#     print(logged_in_user.following)
-#     return render_template('user_profile.html', title='User profile', user=user, current_user=logged_in_user)
+    if user is None:
+        flash("User does not exist")
+        return redirect('/index')
+    return render_template('user_profile.html', title='User profile', user=user, current_user=logged_in_user)
+
+# @myapp_obj.route('/search', methods=['GET', 'POST'])
+# def search():
+#     if request.method == 'POST':
+#         search = request.form['search']
+#         users = User.query.filter(User.username.like('%' + search + '%')).all()
+#         return render_template('search.html', title='Search', users=users)
+#     return render_template('search.html', title='Search')
 
 @myapp_obj.route('/follow/<username>')
 @login_required

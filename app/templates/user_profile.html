@@ -13,17 +13,29 @@
             <img src="{{url_for('static',filename = 'images/profilePic.png')}}" alt="Profile Picture"/>
             <div>
                 <h1 class="user-name">{{ user.username }}</h1>
-                {% if user.id in current_user.following %}
-                    <form method="post" action="{{ url_for('unfollow', user_id=user.id) }}">
-                        <button type="submit" href="{{ url_for('unfollow', username = user.username) }}" class="btn btn-primary">Following</button>
-                    </form>
-                {% else %}
-                    <form method="post" action="{{ url_for('follow', user_id=user.id) }}">
-                        <button type="submit" href="{{ url_for('follow', username = user.username) }}" class="btn btn-primary">Follow</button>
-                    </form> 
-                {% endif %}
+                <button onclick="myFunction()" id="myButton" value="Follow">Follow</button>
+                <!-- <div><h2>Followers</h2></div>
+                <body><h3 id = "output"></h3></body> -->
             </div>
         </div>
+
+        <script>
+            function myFunction() {
+            var count = 0;
+            var btn = document.getElementById("myButton");
+            
+            if (btn.value == "Follow") {
+                btn.value = "Following";
+                btn.innerHTML = "Following";
+                count++
+            }
+            else {
+                btn.value = "Follow";
+                btn.innerHTML = "Follow";
+            }
+            document.getElementById('output').innerHTML = count;
+            }
+            </script>
 
         {% for post in user.posts %}
         <div style="margin: 20px; width:fit-content; height: auto;" class="card">
