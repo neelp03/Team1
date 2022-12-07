@@ -15,7 +15,7 @@
 - Team updates
   - Neel worked on starting all the base html templates and necessary python files.
   - Steven worked with Neel to ensure that the program runs. Began looking into creating the static folder containing the css file.
-  - Hasnain
+  - Hasnain worked on being able to search for a user and caters for when a user does not exist, I also worked on styling
   - Maaz
 
 - Group progress is a bit slow right now since Thanksgiving break came by, but smooth nonetheless. We've managed to get all the necessary files started and we'll be able to start working on functional requirements.
@@ -24,20 +24,17 @@
 - Steven Vu, Neel Patel, Hasnain Mucklai
 - Team updates
   - Steven finished functional requirements of Login and Create new account. Created necessary flask forms and fully functional with the database. Styled the login & register pages
-  - Neel
-  - Hasnain
+  - Hasnain completed search for user, was able to get the follow feature to partially work and added the like, dislike buttons on a post
+  - Neel created forms, templates and user/post db models. Created routes and added necessary imports. Added styling and navbar to homepage. Will work on getting the functionalities working.
   - Maaz
 
 - Group progress is going fast and smooth. Two functional requirements have been completed and more will be completed extremely soon. We have a navbar, login page, and register page done so far. Plus, everything is responsive so far!
 
 ### 2022-12-6 at 11:30 LAST DAY OF INSTRUCTION
-- Who attended the meeting
-- Team updates (15min or less)
-  <Each team member gives an update of what they did from the last meeting and what
-they plan to do next. If they are stuck, bring it up here to see if others can 
-help.>
-  - <name> worked on X. Will work on Y next. 
-- pair-programming (optional) (25 mins)
-  <- Pair program on one part of the project. Driver will be the person responsible
-for that requirement.>
-- Summarize group progress
+- All team members attended the meeting
+  - Steven worked on the styling of every page. Finished up the functionality for logout and aided others in their requirements.
+  - Neel finished all of his requirements. Working on adding finishing touches and helping other members when needed.
+  - Hasnain
+  - Maaz
+
+- We're only missing two more functional requirements and we are done! The last two are: Like/Dislike posts and follow users.

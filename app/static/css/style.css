@@ -373,9 +373,40 @@ html, body {
     background-color: white;
     display: flex;
     padding: 100px;
+    position: relative;
 }
 
 .user-body h1 {
     font-size: 4rem;
+}
+
+.user-body h2 {
+    font-size: 2rem;
+    position: fixed;
+    top: 530px;
+    left: 670px;
+    width: 20px;
+    height: 90px;
+    flex-direction: column;
+}
+
+.user-body h3 {
+    font-size: 2rem;
+    position: fixed;
+    top: 560px;
+    left: 720px;
+    width: 20px;
+    height: 90px;
+    flex-direction: column;
+}
+
+.user-body body {
+    font-size: 2rem;
+    position: fixed;
+    top: 585px;
+    left: 680px;
+    width: 20px;
+    height: 90px;
+    flex-direction: column;
 }
 

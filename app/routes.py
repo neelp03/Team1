@@ -84,7 +84,7 @@ def register():
             flash ('Passwords do not match!')
             return redirect('/register')
 
-        newUser = User(username=current_form.username.data, email=current_form.email.data, password_hash=current_form.password.data)
+        newUser = User(username=current_form.username.data, email=current_form.email.data, password_hash=current_form.password.data,)
         newUser.set_password(newUser.password_hash)
         db.session.add(newUser)
         db.session.commit()
@@ -119,11 +119,51 @@ def delete_post(post_id):
 def user_profile():
     username = request.args.get('username')
     user = User.query.filter_by(username=username).first()
+    logged_in_user = User.query.get_or_404(current_user.id)
 
     if user is None:
         flash("User does not exist")
         return redirect('/index')
-    return render_template('user_profile.html', title='User profile', user=user)
+    return render_template('user_profile.html', title='User profile', user=user, current_user=logged_in_user)
+
+# @myapp_obj.route('/search', methods=['GET', 'POST'])
+# def search():
+#     if request.method == 'POST':
+#         search = request.form['search']
+#         users = User.query.filter(User.username.like('%' + search + '%')).all()
+#         return render_template('search.html', title='Search', users=users)
+#     return render_template('search.html', title='Search')
+
+@myapp_obj.route('/follow/<username>')
+@login_required
+def follow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('index'))
+    if user == current_user:
+        flash('You cannot follow yourself!')
+        return redirect(url_for('user', username=username))
+    current_user.follow(user)
+    db.session.commit()
+    flash('You are following {}!'.format(username))
+    return redirect(url_for('user', username=username))
+
+# unfollow user
+@myapp_obj.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('index'))
+    if user == current_user:
+        flash('You cannot unfollow yourself!')
+        return redirect(url_for('user', username=username))
+    current_user.unfollow(user)
+    db.session.commit()
+    flash('You are not following {}.'.format(username))
+    return redirect(url_for('user', username=username))
 
 @myapp_obj.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
 def update_post(post_id):
