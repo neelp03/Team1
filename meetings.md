@@ -37,4 +37,4 @@
   - Hasnain continued to work on the folow/following features.
   - Maaz
 
-- We're only missing two more functional requirements and we are done! The last two are: Like/Dislike posts and follow users.
+- We're only missing two more functional requirements and we are done! The last two are: Like/Dislike posts and follow users. We're also missing edit a post and send message to followers.
