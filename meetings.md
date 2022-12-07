@@ -15,7 +15,7 @@
 - Team updates
   - Neel worked on starting all the base html templates and necessary python files.
   - Steven worked with Neel to ensure that the program runs. Began looking into creating the static folder containing the css file.
-  - Hasnain
+  - Hasnain worked on being able to search for a user and caters for when a user does not exist, I also worked on styling
   - Maaz
 
 - Group progress is a bit slow right now since Thanksgiving break came by, but smooth nonetheless. We've managed to get all the necessary files started and we'll be able to start working on functional requirements.
@@ -25,7 +25,7 @@
 - Team updates
   - Steven finished functional requirements of Login and Create new account. Created necessary flask forms and fully functional with the database. Styled the login & register pages
   - Neel
-  - Hasnain
+  - Hasnain completed search for user, was able to get the follow feature to partially work and added the like, dislike buttons on a post
   - Maaz
 
 - Group progress is going fast and smooth. Two functional requirements have been completed and more will be completed extremely soon. We have a navbar, login page, and register page done so far. Plus, everything is responsive so far!
