@@ -2,6 +2,7 @@ from app import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+from sqlalchemy.ext.mutable import MutableSet
 
 class followers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -18,12 +19,13 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
-    followed = db.relationship(
-        'User', secondary='followers',
-        primaryjoin=(followers.follower_id == id),
-        secondaryjoin=(followers.followed_id == id),
-        backref=db.backref('followers', lazy='dynamic'),
-        lazy='dynamic')
+    # followed = db.relationship(
+    #     'User', secondary='followers',
+    #     primaryjoin=(followers.follower_id == id),
+    #     secondaryjoin=(followers.followed_id == id),
+    #     backref=db.backref('followers', lazy='dynamic'),
+    #     lazy='dynamic')
+    followed = db.Column(MutableSet.as_mutable(db.PickleType))
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -35,16 +37,19 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def follow(self, user):
-        if not self.is_following(user):
-            self.followed.append(user)
+        if self.followed is None:
+            self.followed = MutableSet({user.id})
+        elif not self.is_following(user):
+            self.followed.add(user.id)
 
     def unfollow(self, user):
         if self.is_following(user):
-            self.followed.remove(user)
+            self.followed.remove(user.id)
 
     def is_following(self, user):
-        return self.followed.filter(
-            followers.followed_id == user.id).count() > 0
+        if self.followed is None:
+            return False
+        return user.id in self.followed
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -59,7 +64,13 @@ class Post(db.Model):
         return '<Post {}>'.format(self.body)
 
     def incLikes(self):
-        self.likes = self.likes + 1
+        if self.likes is None:
+            self.likes = 1
+        else:
+            self.likes = self.likes + 1
 
     def incDislikes(self):
-        self.dislikes = self.dislikes + 1
+        if self.dislikes is None:
+            self.dislikes = 1
+        else:
+            self.dislikes = self.dislikes + 1

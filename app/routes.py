@@ -16,21 +16,17 @@ def index():
 @myapp_obj.route('/like/<int:post_id>', methods=['GET', 'POST'])
 def like(post_id):
     post = Post.query.get_or_404(post_id)
-    if post.author != current_user:
-        abort(403)
-    # post.incLikes()
+    post.incLikes()
     flash('You liked the post!')
-    # db.session.commit()
+    db.session.commit()
     return redirect(url_for('index'))
 
 @myapp_obj.route('/dislike/<int:post_id>', methods=['GET', 'POST'])
 def dislike(post_id):
     post = Post.query.get_or_404(post_id)
-    if post.author != current_user:
-        abort(403)
-    # post.incDislikes()
+    post.incDislikes()
     flash('You disliked the post!')
-    # db.session.commit()
+    db.session.commit()
     return redirect(url_for('index'))
 
 @myapp_obj.route('/logout', methods=['GET', 'POST'])
@@ -84,7 +80,7 @@ def register():
             flash ('Passwords do not match!')
             return redirect('/register')
 
-        newUser = User(username=current_form.username.data, email=current_form.email.data, password_hash=current_form.password.data,)
+        newUser = User(username=current_form.username.data, email=current_form.email.data, password_hash=current_form.password.data)
         newUser.set_password(newUser.password_hash)
         db.session.add(newUser)
         db.session.commit()
@@ -119,12 +115,12 @@ def delete_post(post_id):
 def user_profile():
     username = request.args.get('username')
     user = User.query.filter_by(username=username).first()
-    logged_in_user = User.query.get_or_404(current_user.id)
+    print (current_user.followed)
 
     if user is None:
         flash("User does not exist")
         return redirect('/index')
-    return render_template('user_profile.html', title='User profile', user=user, current_user=logged_in_user)
+    return render_template('user_profile.html', title='User profile', user=user, current_user=current_user)
 
 # @myapp_obj.route('/search', methods=['GET', 'POST'])
 # def search():
@@ -134,7 +130,7 @@ def user_profile():
 #         return render_template('search.html', title='Search', users=users)
 #     return render_template('search.html', title='Search')
 
-@myapp_obj.route('/follow/<username>')
+@myapp_obj.route('/follow/<string:username>',  methods=['POST'])
 @login_required
 def follow(username):
     user = User.query.filter_by(username=username).first()
@@ -143,14 +139,15 @@ def follow(username):
         return redirect(url_for('index'))
     if user == current_user:
         flash('You cannot follow yourself!')
-        return redirect(url_for('user', username=username))
+        return redirect('/user_profile?username='+username)
     current_user.follow(user)
+    print (current_user.followed)
     db.session.commit()
     flash('You are following {}!'.format(username))
-    return redirect(url_for('user', username=username))
+    return redirect('/user_profile?username='+username)
 
 # unfollow user
-@myapp_obj.route('/unfollow/<username>')
+@myapp_obj.route('/unfollow/<username>',  methods=['POST'])
 @login_required
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
@@ -163,7 +160,7 @@ def unfollow(username):
     current_user.unfollow(user)
     db.session.commit()
     flash('You are not following {}.'.format(username))
-    return redirect(url_for('user', username=username))
+    return redirect('/user_profile?username='+username)
 
 @myapp_obj.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
 def update_post(post_id):
