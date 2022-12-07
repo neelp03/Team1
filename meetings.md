@@ -34,7 +34,7 @@
 - All team members attended the meeting
   - Steven worked on the styling of every page. Finished up the functionality for logout and aided others in their requirements.
   - Neel finished all of his requirements. Working on adding finishing touches and helping other members when needed.
-  - Hasnain
+  - Hasnain continued to work on the folow/following features.
   - Maaz
 
 - We're only missing two more functional requirements and we are done! The last two are: Like/Dislike posts and follow users.
