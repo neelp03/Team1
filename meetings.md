@@ -32,9 +32,9 @@
 
 ### 2022-12-6 at 11:30 LAST DAY OF INSTRUCTION
 - All team members attended the meeting
-  - Steven
+  - Steven worked on the styling of every page. Finished up the functionality for logout and aided others in their requirements.
   - Neel finished all of his requirements. Working on adding finishing touches and helping other members when needed.
   - Hasnain
   - Maaz
 
-- Summarize group progress
+- We're only missing two more functional requirements and we are done! The last two are: Like/Dislike posts and follow users.

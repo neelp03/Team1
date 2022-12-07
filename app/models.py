@@ -57,3 +57,9 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+
+    def incLikes(self):
+        self.likes = self.likes + 1
+
+    def incDislikes(self):
+        self.dislikes = self.dislikes + 1
