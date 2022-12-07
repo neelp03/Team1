@@ -118,6 +118,13 @@ html, body {
     min-width: 100%;
 }
 
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
 @media screen and (max-height: 531px), screen and (max-width: 768px) {
     .home-left {
         display: none;
