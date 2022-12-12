@@ -162,18 +162,20 @@ def unfollow(username):
     flash('You are not following {}.'.format(username))
     return redirect('/user_profile?username='+username)
 
-@myapp_obj.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
+
+@myapp_obj.route('/update_post/<int:post_id>', methods=['GET', 'POST'])
+@login_required
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
     if post.author != current_user:
         abort(403)
     form = PostForm()
     if form.validate_on_submit():
-        # post.title = form.title.data
+        post.title = form.title.data
         post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!')
-        return redirect(url_for('post', post_id=post.id))
+        return redirect(url_for('index'))
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content
