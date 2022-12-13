@@ -21,3 +21,8 @@ class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = StringField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')
+
+class MessageForm(FlaskForm):
+    content = StringField('Content', validators=[DataRequired()])
+    submit = SubmitField('Send')
+

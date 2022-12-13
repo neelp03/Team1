@@ -1,6 +1,6 @@
 from app import db, myapp_obj
-from app.models import User, Post
-from app.forms import LoginForm, RegisterForm, DeleteAccountForm, PostForm
+from app.models import User, Post, Message
+from app.forms import LoginForm, RegisterForm, MessageForm, PostForm
 from flask import render_template, flash, redirect, url_for, request, abort
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
@@ -100,7 +100,6 @@ def create_post():
         return redirect(url_for('index'))
     return render_template('create_post.html', title='Create Post', form=form, legend='Create Post')
 
-# delete a post
 @myapp_obj.route('/delete_post/<int:post_id>', methods=['GET', 'POST'])
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
@@ -121,14 +120,6 @@ def user_profile():
         flash("User does not exist")
         return redirect('/index')
     return render_template('user_profile.html', title='User profile', user=user, current_user=current_user)
-
-# @myapp_obj.route('/search', methods=['GET', 'POST'])
-# def search():
-#     if request.method == 'POST':
-#         search = request.form['search']
-#         users = User.query.filter(User.username.like('%' + search + '%')).all()
-#         return render_template('search.html', title='Search', users=users)
-#     return render_template('search.html', title='Search')
 
 @myapp_obj.route('/follow/<string:username>',  methods=['POST'])
 @login_required
@@ -180,3 +171,24 @@ def update_post(post_id):
         form.title.data = post.title
         form.content.data = post.content
     return render_template('create_post.html', title='Update Post', form=form, legend='Update Post')
+
+@myapp_obj.route('/send_message/<recipient>', methods=['GET', 'POST'])
+@login_required
+def send_message(recipient):
+    user = User.query.filter_by(username=recipient).first_or_404()
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=user, body=form.message.data)
+        db.session.add(msg)
+        db.session.commit()
+        flash('Your message has been sent.')
+        return redirect(url_for('user_profile', username=recipient))
+    return render_template('send_message.html', title='Send Message', form=form, recipient=recipient)
+
+@myapp_obj.route('/messages')
+@login_required
+def messages():
+    current_user.last_message_read_time = datetime.utcnow()
+    db.session.commit()
+    messages = current_user.received_messages.order_by(Message.timestamp.desc())
+    return render_template('messages.html', messages=messages)

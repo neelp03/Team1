@@ -19,13 +19,9 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
-    # followed = db.relationship(
-    #     'User', secondary='followers',
-    #     primaryjoin=(followers.follower_id == id),
-    #     secondaryjoin=(followers.followed_id == id),
-    #     backref=db.backref('followers', lazy='dynamic'),
-    #     lazy='dynamic')
     followed = db.Column(MutableSet.as_mutable(db.PickleType))
+    sent_messages = db.relationship('Message', foreign_keys='Message.sender_id', backref='author', lazy='dynamic')
+    received_messages = db.relationship('Message', foreign_keys='Message.recipient_id', backref='recipient', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -50,6 +46,16 @@ class User(UserMixin, db.Model):
         if self.followed is None:
             return False
         return user.id in self.followed
+
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    body = db.Column(db.String(140))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.datetime.utcnow)
+
+    def __repr__(self):
+        return '<Message {}>'.format(self.body)
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)

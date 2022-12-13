@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Messages</h1>
+    {% for message in messages %}
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ message.author.username }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ message.timestamp }}</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ message.body }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
