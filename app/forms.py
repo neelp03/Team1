@@ -16,13 +16,12 @@ class DeleteAccountForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Delete Account')
 
-# create a post
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = StringField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')
 
 class MessageForm(FlaskForm):
-    content = StringField('Content', validators=[DataRequired()])
+    message = StringField('Message', validators=[DataRequired()])
     submit = SubmitField('Send')
 

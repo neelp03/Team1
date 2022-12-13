@@ -22,9 +22,10 @@
                     <button type="submit" class="btn btn-primary">Follow</button>
                 </form>
                 {% endif %}
-                <!-- <button onclick="myFunction()" id="myButton" value="Follow">Follow</button> -->
-                <!-- <div><h2>Followers</h2></div>
-                <body><h3 id = "output"></h3></body> -->
+                <br/>
+                <form action="{{ url_for('send_message', recipient=user.username) }}" method="POST">
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
             </div>
         </div>
 
