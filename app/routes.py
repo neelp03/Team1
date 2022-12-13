@@ -192,3 +192,8 @@ def messages():
     db.session.commit()
     messages = current_user.received_messages.order_by(Message.timestamp.desc())
     return render_template('messages.html', messages=messages)
+
+@myapp_obj.route('/friends')
+@login_required
+def friends():
+    return render_template('friends.html', friends=friends)
