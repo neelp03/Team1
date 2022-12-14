@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Send Message</h1>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        {{ form.message.label }} {{ form.message(size=80) }}<br>
+        {{ form.submit() }}
+    </form>
+{% endblock %}
